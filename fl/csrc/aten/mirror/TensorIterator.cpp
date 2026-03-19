@@ -1,5 +1,5 @@
 /**
- * AcceleratorTensorIterator mirror 实现 — 骨架。
+ * AcceleratorTensorIterator mirror 实现 — framework。
  * 实际实现需从 torch_npu 的 NPUTensorIterator 迁移。
  */
 #include "fl/csrc/aten/mirror/TensorIterator.h"

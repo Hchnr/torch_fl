@@ -1,5 +1,5 @@
 """
-MLU 后端（寒武纪）— 骨架实现。
+MLU 后端（寒武纪）— framework实现。
 实际 C++ 扩展和算子实现需从 torch_mlu 迁移。
 """
 import torch
@@ -31,7 +31,7 @@ def get_config():
 
 
 def post_register():
-    """MLU 特有的额外注册 — 骨架，待迁移"""
+    """MLU 特有的额外注册 — framework，待迁移"""
     # TODO: 注册 cnnl / mlufusion 到 torch.backends
     # TODO: TF32 控制
     # TODO: gencase 检查
@@ -39,5 +39,5 @@ def post_register():
 
 
 def shutdown():
-    """MLU 退出清理 — 骨架，待迁移"""
+    """MLU 退出清理 — framework，待迁移"""
     pass

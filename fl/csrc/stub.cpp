@@ -1,5 +1,5 @@
 /**
- * PyInit 入口 — 骨架。
+ * PyInit 入口 — framework。
  * 实际 Python bindings 需从 torch_npu/torch_mlu 迁移。
  */
 #include <torch/extension.h>

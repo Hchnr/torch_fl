@@ -1,4 +1,4 @@
-"""统一的序列化补丁 — 骨架。"""
+"""统一的序列化补丁 — framework。"""
 
 
 def apply(backend_name: str, backend_mod, _C):
