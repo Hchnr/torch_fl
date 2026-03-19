@@ -1,5 +1,5 @@
 """
-NPU 后端（华为 Ascend）— 骨架实现。
+NPU 后端（华为 Ascend）— framework实现。
 实际 C++ 扩展和算子实现需从 torch_npu 迁移。
 """
 import torch
@@ -31,7 +31,7 @@ def get_config():
 
 
 def post_register():
-    """NPU 特有的额外注册 — 骨架，待迁移"""
+    """NPU 特有的额外注册 — framework，待迁移"""
     # TODO: contrib 模块注入
     # TODO: 自定义算子注册
     # TODO: ASD（自动故障检测）
@@ -42,5 +42,5 @@ def post_register():
 
 
 def shutdown():
-    """NPU 退出清理 — 骨架，待迁移"""
+    """NPU 退出清理 — framework，待迁移"""
     pass
