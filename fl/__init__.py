@@ -87,11 +87,12 @@ def dist_backend() -> str:
 
 
 # FlagGems 集成
+from fl import gems  # noqa: F401 — 始终加载模块，确保 fl.gems.* API 可用
+
 _FL_GEMS = os.environ.get("FL_GEMS", "1")
 if _FL_GEMS == "1":
-    from fl import gems as _gems_module
-    if _gems_module.is_available():
-        _gems_module._auto_enable()
+    if gems.is_available():
+        gems._auto_enable()
 elif _FL_GEMS != "0":
     raise ValueError(f"Invalid FL_GEMS value: {_FL_GEMS}. Use '0' or '1'.")
 
