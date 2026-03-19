@@ -7,19 +7,19 @@ set(FL_BACKEND "" CACHE STRING "Backend: npu | mlu (CUDA does not use CMake)")
 file(GLOB_RECURSE COMMON_SRCS fl/csrc/**/*.cpp)
 
 # 后端特有源文件
-file(GLOB_RECURSE BACKEND_SRCS backends/${FL_BACKEND}/csrc/**/*.cpp)
+file(GLOB_RECURSE BACKEND_SRCS fl/backends/${FL_BACKEND}/csrc/**/*.cpp)
 
 # SDK 配置
 if(FL_BACKEND STREQUAL "npu")
     set(SDK_HOME $ENV{ASCEND_HOME_PATH})
     set(SDK_LIBS ascendcl hccl)
-    add_subdirectory(backends/npu/third_party/op-plugin)
+    add_subdirectory(fl/backends/npu/third_party/op-plugin)
 elseif(FL_BACKEND STREQUAL "mlu")
     set(SDK_HOME $ENV{NEUWARE_HOME})
     set(SDK_LIBS cnnl cnrt cncl cndrv)
     if(USE_BANG)
         enable_language(BANG)
-        file(GLOB_RECURSE BANG_SRCS backends/mlu/csrc/aten/operators/bang/**/*.mlu)
+        file(GLOB_RECURSE BANG_SRCS fl/backends/mlu/csrc/aten/operators/bang/**/*.mlu)
     endif()
 endif()
 
@@ -27,7 +27,7 @@ endif()
 add_library(_C SHARED ${COMMON_SRCS} ${BACKEND_SRCS})
 target_include_directories(_C PRIVATE
     fl/csrc
-    backends/${FL_BACKEND}/csrc
+    fl/backends/${FL_BACKEND}/csrc
     ${SDK_HOME}/include
     ${TORCH_INCLUDE_DIRS}
 )

@@ -26,7 +26,7 @@ def _auto_detect_sdk():
 
 BACKEND = os.environ.get("FL_BACKEND", _auto_detect_sdk())
 
-packages = find_packages(include=["fl", "fl.*", f"backends.{BACKEND}.*"])
+packages = find_packages(include=["fl", "fl.*"])
 
 with open("version.txt") as f:
     version = f.read().strip()
@@ -46,7 +46,7 @@ else:
     from glob import glob
 
     common_sources = glob("fl/csrc/**/*.cpp", recursive=True)
-    backend_sources = glob(f"backends/{BACKEND}/csrc/**/*.cpp", recursive=True)
+    backend_sources = glob(f"fl/backends/{BACKEND}/csrc/**/*.cpp", recursive=True)
 
     SDK_CONFIG = {
         "npu": {
@@ -70,7 +70,7 @@ else:
             sources=common_sources + backend_sources,
             include_dirs=[
                 "fl/csrc",
-                f"backends/{BACKEND}/csrc",
+                f"fl/backends/{BACKEND}/csrc",
                 f"{sdk_home}/include",
             ] + cfg["include_extra"],
             library_dirs=[f"{sdk_home}/lib64"],
