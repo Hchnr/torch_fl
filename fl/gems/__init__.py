@@ -17,6 +17,9 @@ _gems_lib = None
 _registered_ops = {}
 _full_config_cache = None
 
+# 模块内定义了名为 set 的函数，在此先保存内置 set 的引用
+_builtin_set = set
+
 
 def is_available() -> bool:
     """检查 FlagGems 是否已安装"""
@@ -81,9 +84,9 @@ def _register_impl(exclude=None, include=None, rollback_on_error=True):
         return
 
     full_config = _load_full_config()
-    backend_exclude = set(_get_backend_exclude_ops())
-    user_exclude = set(exclude or [])
-    user_include = set(include) if include is not None else None
+    backend_exclude = _builtin_set(_get_backend_exclude_ops())
+    user_exclude = _builtin_set(exclude or [])
+    user_include = _builtin_set(include) if include is not None else None
     dispatch_key = _resolve_dispatch_key()
 
     _gems_lib = torch.library.Library("aten", "IMPL")
