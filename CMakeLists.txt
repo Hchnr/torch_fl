@@ -39,6 +39,15 @@ endif()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include(${PROJECT_SOURCE_DIR}/cmake/TorchPythonTargets.cmake)
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/openreg)
+option(USE_CUDA_BACKEND "Use real CUDA as the openreg backend" OFF)
+
+if(USE_CUDA_BACKEND)
+  enable_language(CUDA)
+  find_package(CUDAToolkit REQUIRED)
+  add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/openreg_cuda)
+else()
+  add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/openreg)
+endif()
+
 add_subdirectory(${PROJECT_SOURCE_DIR}/csrc)
 add_subdirectory(${PROJECT_SOURCE_DIR}/torch_openreg/csrc)

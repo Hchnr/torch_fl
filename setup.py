@@ -50,6 +50,9 @@ def build_deps():
         "-DPYTORCH_INSTALL_DIR=" + get_pytorch_dir(),
     ]
 
+    if os.environ.get("USE_CUDA_BACKEND", "0") == "1":
+        cmake_args.append("-DUSE_CUDA_BACKEND=ON")
+
     subprocess.check_call(
         ["cmake", BASE_DIR] + cmake_args, cwd=build_dir, env=os.environ
     )
